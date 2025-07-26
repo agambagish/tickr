@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 import { cn } from "@/lib/utils";
 import { Footer } from "@/modules/layout/components/footer";
 import { Header } from "@/modules/layout/components/header";
@@ -18,14 +20,16 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
-    <html lang="en">
-      <body className={cn("antialiased", font.className)}>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={cn("antialiased", font.className)}>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

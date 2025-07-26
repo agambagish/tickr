@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import { TicketsIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { AuthSection } from "@/modules/layout/components/auth-section";
 
 const logoFont = Oswald({
   subsets: ["latin"],
@@ -44,14 +44,7 @@ export function Header() {
           >
             About
           </Link>
-          <div className="space-x-4">
-            <Button variant="outline" size="sm">
-              Sign In
-            </Button>
-            <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700">
-              Get Started
-            </Button>
-          </div>
+          <AuthSection />
         </nav>
       </div>
     </header>

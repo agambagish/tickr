@@ -107,7 +107,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-8 text-center text-gray-600 text-sm">
-          <p>&copy; 2024 Tickr. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Tickr. All rights reserved.</p>
         </div>
       </div>
     </footer>
