@@ -1,7 +1,19 @@
+import { BenefitsSection } from "@/modules/home/components/benefits-section";
+import { CTASection } from "@/modules/home/components/cta-section";
+import { FeaturesSection } from "@/modules/home/components/features-section";
+import { HeroSection } from "@/modules/home/components/hero-section";
+import { PricingSection } from "@/modules/home/components/pricing-section";
+import { VerificationWorkflowSection } from "@/modules/home/components/verification-workflow-section";
+
 export default function Page() {
   return (
-    <p className="font-bold text-2xl">
-      Lorem ipsum dolor sit amet consectetur adipisicing.
-    </p>
+    <>
+      <HeroSection />
+      <FeaturesSection />
+      <VerificationWorkflowSection />
+      <BenefitsSection />
+      <PricingSection />
+      <CTASection />
+    </>
   );
 }
