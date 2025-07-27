@@ -4,8 +4,6 @@ import { Jost } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
-import { Footer } from "@/modules/layout/components/footer";
-import { Header } from "@/modules/layout/components/header";
 
 import "./globals.css";
 
@@ -22,13 +20,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn("antialiased", font.className)}>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-        </body>
+        <body className={cn("antialiased", font.className)}>{children}</body>
       </html>
     </ClerkProvider>
   );
