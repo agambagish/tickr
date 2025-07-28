@@ -1,6 +1,7 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardHeader } from "@/modules/dashboard/components/dashboard-header";
 import { DashboardSidebar } from "@/modules/dashboard/components/dashboard-sidebar";
+import { DialogProvider } from "@/providers/dialog-provider";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   return (
@@ -17,6 +18,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
         <div className="flex flex-1 flex-col">
           <DashboardHeader />
           {children}
+          <DialogProvider />
         </div>
       </SidebarInset>
     </SidebarProvider>

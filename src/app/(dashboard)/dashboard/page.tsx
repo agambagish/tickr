@@ -28,6 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCreateEventDialog } from "@/modules/dashboard/hooks/use-create-event-dialog";
 
 const sampleEvents = [
   {
@@ -68,6 +69,7 @@ const sampleEvents = [
 export default function Page() {
   const [filter, setFilter] = useState("active");
   const [events] = useState(sampleEvents);
+  const { onOpen } = useCreateEventDialog();
 
   return (
     <main className="layout-wrapper flex-1 p-6">
@@ -132,6 +134,13 @@ export default function Page() {
                     <TabsTrigger value="expired">Expired</TabsTrigger>
                   </TabsList>
                 </Tabs>
+                <Button
+                  size="sm"
+                  className="bg-emerald-600 hover:bg-emerald-700"
+                  onClick={onOpen}
+                >
+                  Create New Event
+                </Button>
               </div>
             </div>
           </CardHeader>
