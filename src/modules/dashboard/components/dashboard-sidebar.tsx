@@ -29,7 +29,7 @@ export function DashboardSidebar({
   const pathname = usePathname();
 
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -37,7 +37,7 @@ export function DashboardSidebar({
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <Link href="/">
+              <Link href="/dashboard">
                 <TicketsIcon className="!size-6 text-emerald-600" />
                 <span
                   className={cn(
@@ -59,12 +59,12 @@ export function DashboardSidebar({
               <SidebarMenuItem>
                 <SidebarMenuButton
                   tooltip="Events"
-                  isActive={pathname === "/dashboard"}
+                  isActive={pathname === "/dashboard/events"}
                   asChild
                 >
-                  <Link href="/dashboard">
+                  <Link href="/dashboard/events">
                     <CalendarDaysIcon />
-                    <span>Dashboard</span>
+                    <span>Events</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -87,8 +87,27 @@ export function DashboardSidebar({
         </SidebarGroup>
         <SidebarGroup className="mt-auto">
           <SidebarGroupContent>
-            <div className="py-3">
-              <div className="space-y-3 rounded-lg border p-4">
+            <div className="py-3 group-data-[state=collapsed]:px-0">
+              <div className="hidden group-data-[state=collapsed]:block">
+                <Button
+                  size="icon"
+                  className="border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <title className="hidden">_</title>
+                    <path
+                      fillRule="evenodd"
+                      d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </Button>
+              </div>
+              <div className="space-y-3 rounded-lg border p-4 group-data-[state=collapsed]:hidden">
                 <div className="space-y-2">
                   <div className="font-medium text-gray-900 text-sm">
                     3 / 10 Events Used

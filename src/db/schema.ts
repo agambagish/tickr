@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   decimal,
+  index,
   integer,
   pgEnum,
   pgTable,
@@ -15,15 +16,25 @@ export const ticketValidityEnum = pgEnum("ticket_validity", [
   "multiple",
 ]);
 
-export const events = pgTable("events", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 50 }).notNull(),
-  venue: varchar({ length: 75 }).notNull(),
-  type: text().notNull(),
-  startsAt: timestamp().notNull(),
-  endsAt: timestamp(),
-  timezone: text().notNull(),
-});
+export const events = pgTable(
+  "events",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    name: varchar({ length: 50 }).notNull(),
+    venue: varchar({ length: 75 }).notNull(),
+    type: text().notNull(),
+    startsAt: timestamp().notNull(),
+    endsAt: timestamp(),
+    timezone: text().notNull(),
+    userId: text().notNull(),
+    createdAt: timestamp().notNull().defaultNow(),
+    updatedAt: timestamp()
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  },
+  (t) => [index().on(t.id), index().on(t.userId)],
+);
 
 export const ticketsCategories = pgTable("tickets_categories", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -34,6 +45,11 @@ export const ticketsCategories = pgTable("tickets_categories", {
   eventId: integer()
     .notNull()
     .references(() => events.id, { onDelete: "cascade" }),
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp()
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
 });
 
 export const tickets = pgTable("tickets", {
@@ -45,6 +61,11 @@ export const tickets = pgTable("tickets", {
   ticketCategoryId: integer()
     .notNull()
     .references(() => ticketsCategories.id, { onDelete: "cascade" }),
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp()
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
 });
 
 export const eventsRelations = relations(events, ({ many }) => ({

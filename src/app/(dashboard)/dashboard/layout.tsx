@@ -12,6 +12,7 @@ export default function Layout({ children }: React.PropsWithChildren) {
           "--header-height": "calc(var(--spacing) * 12)",
         } as React.CSSProperties
       }
+      defaultOpen={false}
     >
       <DashboardSidebar variant="inset" />
       <SidebarInset>
