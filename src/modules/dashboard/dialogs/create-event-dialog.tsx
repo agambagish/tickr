@@ -74,16 +74,13 @@ export function CreateEventDialog() {
     toast.promise(createEvent(values), {
       loading: "Creating event...",
       success: (newEventId) => {
-        form.reset();
-        setIsLoading(false);
-        router.push(`/dashboard/events/${newEventId}`);
         onClose();
+        form.reset();
+        router.push(`/dashboard/events/${newEventId}`);
         return "Event created ✅";
       },
-      error: ({ message }: { message: string }) => {
-        setIsLoading(false);
-        return message;
-      },
+      error: ({ message }: { message: string }) => message,
+      finally: () => setIsLoading(false),
     });
   }
 
@@ -94,12 +91,11 @@ export function CreateEventDialog() {
       isOpen={isOpen}
       onClose={onClose}
     >
-      <ScrollArea className="h-[600px] pr-4">
+      <ScrollArea className="h-[calc(100vh-4rem)] pr-4 md:h-[600px]">
         <Form {...form}>
           <form
-            id="form"
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 pb-6"
+            className="space-y-6 pb-36 md:pb-6"
           >
             <FormField
               control={form.control}
@@ -375,10 +371,22 @@ export function CreateEventDialog() {
           </form>
         </Form>
       </ScrollArea>
-      <Button type="submit" form="form" className="w-full" disabled={isLoading}>
-        {isLoading && <Loader2Icon className="animate-spin" />}
-        Create
-      </Button>
+      <ResponsiveDialog.Footer>
+        <div className="flex w-full justify-between md:gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={onClose}
+            disabled={isLoading}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && <Loader2Icon className="animate-spin" />}
+            Create
+          </Button>
+        </div>
+      </ResponsiveDialog.Footer>
     </ResponsiveDialog>
   );
 }

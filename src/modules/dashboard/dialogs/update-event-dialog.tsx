@@ -12,7 +12,6 @@ import { DateTimePicker } from "@/components/global/date-time-picker";
 import { ResponsiveDialog } from "@/components/global/responsive-dialog";
 import { TimezoneInput } from "@/components/global/timezone-input";
 import { Button } from "@/components/ui/button";
-import { DialogFooter } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -76,7 +75,7 @@ export function UpdateEventDialog() {
       loading: "Updating event...",
       success: () => {
         onClose();
-        return "Event updated";
+        return "Event updated ✅";
       },
       error: ({ message }: { message: string }) => message,
       finally: () => setIsLoading(false),
@@ -226,24 +225,25 @@ export function UpdateEventDialog() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           {renderFormField()}
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              disabled={isLoading}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={isLoading || !form.formState.isDirty}
-              className="min-w-[100px]"
-            >
-              {isLoading && <Loader2Icon className="animate-spin" />}
-              Save Changes
-            </Button>
-          </DialogFooter>
+          <ResponsiveDialog.Footer>
+            <div className="flex justify-between md:gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onClose}
+                disabled={isLoading}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                disabled={isLoading || !form.formState.isDirty}
+              >
+                {isLoading && <Loader2Icon className="animate-spin" />}
+                Save Changes
+              </Button>
+            </div>
+          </ResponsiveDialog.Footer>
         </form>
       </Form>
     </ResponsiveDialog>
